@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>Написать функцию loop, которая будет принимать параметры: times (значение по умолчанию = 0), callback (значение по умолчанию = null) и будет в цикле (times раз), вызывать функцию callback. Если функцию не передана, то цикл не должен отрабатывать ни разу. Покажите применение этой функции</p>
+</body>
+
+<script>
+    'use strict';
+
+    function loop(times = 0, callback = null){
+        for (let i = 0; i < times; i++){
+            callback(i);
+        }
+    }
+
+    function log(x=0){
+        console.log(x);
+    }
+
+    loop(3, log)
+</script>
+</html>
