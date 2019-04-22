@@ -19,7 +19,65 @@
         Чтобы вызвать метод базового класса, необходимо внутри вызова метода displayInfo класса Employee написать: super.displayInfo(), это вызовет метод disaplyInfo класс Human и вернет строку с параметрами Human'a.
     </p>
     <script>
-        
+        class Human {
+            constructor(name, age, dataOfBirth){
+                this.name = name;
+                this.age = age;
+                this.dataOfBirth = dataOfBirth;
+            }
+
+            displayInfo(){
+                console.log(`Имя: ${this.name}, Возраст: ${this.age}, Дата рождения: ${this.dataOfBirth}`);
+            }
+        }
+
+        class Employee extends Human {
+            constructor(name, age, dataOfBirth, salary, department){
+                super(name, age, dataOfBirth);
+                this.salary = salary;
+                this.department = department;
+            }
+            displayInfo(){
+                super.displayInfo();
+                console.log(`Заработная плата: ${this.salary}, Подразделение: ${this.department}`);
+            }
+        }
+
+        class Developer extends Employee{
+            constructor(name, age, dataOfBirth, salary, department, manager){
+                super(name, age, dataOfBirth, salary, department);
+                this.manager = manager;
+            }
+            displayInfo(){
+                super.displayInfo();
+                console.log(`Начальник: ${this.manager}`);
+            }
+        }
+
+        class Manager extends Employee{
+            constructor(name, age, dataOfBirth, salary, department, developerList=[]){
+                super(name, age, dataOfBirth, salary, department);
+                this.developerList = developerList;
+            }
+            addDeveloper(developer){
+                this.developerList.push(developer);
+            }
+            removeDeveloper(developer){
+                let index = this.developerList.indexOf(developer);
+                this.developerList.splice(index,1);
+            }
+            displayInfo(){
+                super.displayInfo();
+                console.log(`Подчинённые: ${this.developerList}`);
+            }
+        }
+
+        let vas = new Manager("Василий", 27, "27.01.1992",100000, "Главное Управление");
+        let jen = new Developer("Евгений", 35, "01.01.1986",70000, "Главное Управление");
+
+        vas.addDeveloper(jen);
+        vas.displayInfo();
+
     </script>
 </body>
 </html>
