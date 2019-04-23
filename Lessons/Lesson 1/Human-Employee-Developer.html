@@ -27,7 +27,7 @@
             }
 
             displayInfo(){
-                console.log(`Имя: ${this.name}, Возраст: ${this.age}, Дата рождения: ${this.dataOfBirth}`);
+                return `Имя: ${this.name}, \nВозраст: ${this.age}, \nДата рождения: ${this.dataOfBirth}`;
             }
         }
 
@@ -38,8 +38,7 @@
                 this.department = department;
             }
             displayInfo(){
-                super.displayInfo();
-                console.log(`Заработная плата: ${this.salary}, Подразделение: ${this.department}`);
+                return super.displayInfo() +` \nЗаработная плата: ${this.salary}, \nПодразделение: ${this.department}`;
             }
         }
 
@@ -48,9 +47,12 @@
                 super(name, age, dataOfBirth, salary, department);
                 this.manager = manager;
             }
+
             displayInfo(){
-                super.displayInfo();
-                console.log(`Начальник: ${this.manager}`);
+                if (!this.manager){
+                    console.log(super.displayInfo() + `. \nНачальник: ${this.manager.name}, возраст: ${this.manager.age}`);
+                }
+                console.log(super.displayInfo() + `. \nНачальник: не задан`);
             }
         }
 
@@ -61,22 +63,34 @@
             }
             addDeveloper(developer){
                 this.developerList.push(developer);
+                developer.manager = this;
             }
             removeDeveloper(developer){
                 let index = this.developerList.indexOf(developer);
                 this.developerList.splice(index,1);
+                developer.manager = {name:"-",age:"-"};
             }
             displayInfo(){
-                super.displayInfo();
-                console.log(`Подчинённые: ${this.developerList}`);
+                let developerListStr="";
+                for (let i=0; i<this.developerList.length; i++){
+                    developerListStr+= `\n${i+1}. Имя: ${this.developerList[i].name}; возраст: ${this.developerList[i].age}`;
+                }
+                console.log(super.displayInfo() + `\nПодчинённые: ${developerListStr}`);
             }
         }
 
         let vas = new Manager("Василий", 27, "27.01.1992",100000, "Главное Управление");
         let jen = new Developer("Евгений", 35, "01.01.1986",70000, "Главное Управление");
+        let ivn = new Developer("Иван", 24, "05.11.1994",40000, "Главное Управление");
 
         vas.addDeveloper(jen);
+        vas.addDeveloper(ivn);
         vas.displayInfo();
+        //jen.displayInfo();
+        //ivn.displayInfo();
+        vas.removeDeveloper(jen);
+        vas.displayInfo();
+        jen.displayInfo();
 
     </script>
 </body>
