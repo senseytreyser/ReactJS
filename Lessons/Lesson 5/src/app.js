@@ -1,28 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import "bootstrap/dist/css/bootstrap.min.css"
+import {browserHistory, Router, Route} from 'react-router';
 
-import LifeCycleUnmount from './app/components/LifeCycleUnmount';
+import Layout from './app/layouts/Layout';
 
-class App extends React.Component {
-  constructor(props) {
-    super();
-    this.state = {
-      showUnmountComponent: true
-    };
-  }
+ReactDOM.render(<Router history={browserHistory}>
+  <Route path="/" component={Layout}>
 
-  render() {
-    return (
-      <div>
-        {this.state.showUnmountComponent ? <LifeCycleUnmount/> : null}
-        <button onClick={() => {
-          this.setState({showUnmountComponent: false})
-        }}>Удалить компонент</button>
-      </div>
-    );
-  }
-
-}
-
-
-ReactDOM.render(<App/>, document.querySelector('#root'));
+  </Route>
+</Router>, document.querySelector('#root')); 

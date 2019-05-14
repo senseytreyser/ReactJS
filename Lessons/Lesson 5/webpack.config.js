@@ -19,5 +19,9 @@ module.exports = {
 				use: ['style-loader', 'css-loader']
 			}
 		]
+	},
+	
+	devServer: {
+		contentBase: path.resolve(__dirname, 'dist')
 	}
 }
